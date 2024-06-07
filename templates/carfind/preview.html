@@ -1,0 +1,85 @@
+{% extends 'carfind/base.html' %}
+
+{% load static %}
+
+{% block bodyblock %}
+<script src="{% static 'js/modelFetch.js' %}"></script>
+
+{% include 'carfind/navbar.html' with is_dashobard='true' %}
+
+<div class="w-full h-screen flex flex-col items-center text-white">
+    <div class="mt-24 w-[1020px]">
+        <div class="flex justify-between w-full items-baseline">
+            <p class="font-serif text-4xl text-white">{{offer.model.make.name}} {{offer.model.name}}</p>
+            <p class="font-display text-dark text-xl">{{offer.publication_date}}</p>
+        </div>
+
+        <div class="flex flex-row gap-5">
+            <div class="flex flex-col gap-10">
+                <div class="w-[700px] h-[500px] base-panel-full flex items-center justify-center">
+                    <img id="mainImage" class="max-h-[450px] max-w-[650px] rounded-2xl" src="{{offer.thumbmail.image.url}}"/>
+                </div>
+
+                <script>
+                    function changeMainimage(img)
+                    {
+                        document.getElementById("mainImage").src = img;
+                    }
+                </script>
+
+                <div class="w-[700px] h-[80px] base-panel-full flex gap-2 items-center justify-center">
+                    {% for offerimg in offerImgs  %}
+                        <button onclick="changeMainimage('{{offerimg.image.url}}')">
+                            <img src="{{offerimg.image.url}}" class="max-h-[65px] max-w-[100px] rounded-2xl"/>
+                        </button>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-5">
+                <div class="w-[300px] h-[350px] base-panel-full items-center flex flex-col gap-5">
+                    <p class="font-serif text-4xl mt-5">${{offer.price}}</p>
+                    <hr class="h-0 w-3/4 rounded-2xl text-inputBG">
+                    <div class="flex flex-col gap-2">
+                        <p class="font-display text-dark">Production date: {{offer.production_date}} </p>
+                        <p class="font-display text-dark">Mileage: {{offer.mileage}} </p>
+                        <p class="font-display text-dark">Engine type: {{offer.engine_type}} </p>
+                        <p class="font-display text-dark"> Engine displacement: {{offer.engine_size}} </p>
+                        <p class="font-display text-dark"> Engine power: {{offer.engine_power}} </p>
+                    </div>
+                    <hr class="h-0 w-3/4 rounded-2xl text-inputBG">
+                </div>
+
+                <div class="w-[300px] h-[250px] base-panel-full flex justify-center items-center flex-col gap-4">
+                    <p class="font-serif text-4xl text-white">{{offer.user.username}}</p>
+                    <hr class="h-0 w-3/4 rounded-2xl text-inputBG">
+                    <div class="flex flex-col items-center justify-center gap-2">
+                        <p class="font-display text-dark">Joined: {{offer.user.date_joined}}</p>
+
+                        <script>
+                            function shownumber()
+                            {
+                                number = "{{offer.phone_number}}";
+                                document.getElementById("numberText").innerHTML = "Phone number: " + number;
+                            }
+                        </script>
+
+                        <button onclick="shownumber()">
+                            <p id="numberText" class="font-display text-dark">Click here to show phone number</p>
+                        </button>
+
+                        <p class="font-display text-dark">Location: {{offer.location}}</p>
+
+                        <hr class="h-0 w-3/4 rounded-2xl text-inputBG">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full base-panel-full h-max mt-10">
+            <p class="font-display pt-5 pb-5 pl-10 pr-10">{{offer.description}}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

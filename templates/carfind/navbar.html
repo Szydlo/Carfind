@@ -1,0 +1,16 @@
+<div class="w-screen fixed flex justify-center">
+    <div class="base-panel-full w-[940px] h-[45px] mt-5 flex items-center justify-between"> 
+        <a class="text-[32px] logo ml-5" href="{% url 'carfind_core:index' %}">Carfind.</a>
+
+        {% if is_dashobard and user.is_authenticated %}
+            <div>
+                <a href="{% url 'carfind_core:user_account' %}" class="link-dark mr-5">{{user.username}}</a>
+                <a href="{% url 'carfind_core:add_offer' %}" class="link-dark mr-5">Add offer</a>
+                <a href="{% url 'carfind_core:user_account' %}" class="link-dark mr-5">My offers</a>
+                <a href="{% url 'carfind_core:user_logout' %}" class="link-dark mr-5">Logout</a>
+            </div>
+        {% elif user.is_authenticated %}
+            <a href="{% url 'carfind_core:user_account' %}" class="link-dark mr-5">Your account</a>
+        {% endif %}
+    </div>
+</div>

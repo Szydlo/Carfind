@@ -1,0 +1,43 @@
+{% load static %}
+
+<div class="w-[940px] h-[160px] bg-panelBG rounded-2xl flex flex-row gap-5 shadow-2xl">
+    {% if offer.thumbmail.image.url  %}
+        <img src="{{offer.thumbmail.image.url}}" class="h-full rounded-2xl"/>
+    {% else %}
+        <img src="{% static 'images/noimg.jpg' %}" class="h-full rounded-2xl"/>
+    {% endif %}
+
+    <div class="flex flex-col w-full">
+        <a href="{% url 'carfind_core:offer_preview' offer.pk %}">
+        <div class="flex w-full justify-between">
+            <div class="ml-2">
+                <p class="font-serif text-[32px] text-white">{{offer.model.make.name}} {{offer.model.name}}</p>
+                <p class="font-display text-[16px] text-dark">{{offer.description|truncatechars:40}} &#x2022; {{offer.publication_date}}</p>
+            </div>
+
+            <p class="font-serif text-[32px] text-white mr-4">${{offer.price}}</p>
+        </div>
+    </a>
+
+        <div class="flex items-center h-full mr-5 justify-between">
+            <div class="flex items-center">
+                {% include 'carfind/list/list_element_card.html' with info_text=offer.engine_type.type info_icon="fa-gas-pump" %}
+                {% include 'carfind/list/list_element_card.html' with info_text=offer.mileage info_icon="fa-road"  %}
+                {% include 'carfind/list/list_element_card.html' with info_text=offer.engine_size info_icon="fa-up-right-and-down-left-from-center"  %}
+                {% include 'carfind/list/list_element_card.html' with info_text=offer.engine_power info_icon="fa-dumbbell"  %}
+                {% include 'carfind/list/list_element_card.html' with info_text=offer.production_date.year info_icon="fa-calendar"  %}
+            </div>
+
+            {% if editable and user.is_authenticated %}
+            <div class="flex items-center">
+                <form action="{% url 'carfind_core:user_edit_offer' offer.pk %}"> <!-- I need to close it in div form, cuz there is werid bug when link is inside link -->
+                    <button>{% include 'carfind/list/list_element_card_hoverable.html' with info_text='Edit' info_icon="fa-edit" %}</button>
+                </form>
+
+                <button onclick="popupShow('Do you want delete this offer?')">{% include 'carfind/list/list_element_card_hoverable.html' with info_text='Delete' info_icon="fa-remove" %}</button>
+            </div>
+            {% endif%}
+        </div>
+    </div>
+
+</div>

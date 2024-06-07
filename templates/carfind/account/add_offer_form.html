@@ -1,0 +1,58 @@
+<div class="flex flex-col gap-5">
+    <div class="flex gap-5">
+        <select id="makeSelect" name="make"  onchange="setModels()" class="base-input">
+            <option value="">Make</option>
+
+            {% for make in makes %}
+                {% if offer.model.make == make %}
+                    <option value="{{make.pk}}" selected>{{make.name}}</option>
+                {% else %}
+                    <option value="{{make.pk}}">{{make.name}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        <select id="modelSelect" name="model" class="base-input">
+            <option value="">Model</option>
+        </select>
+    </div>
+
+    <div class="flex gap-5">
+        <input placeholder="Price" value="{{offer.price}}" name="price" class="base-input"/>
+        <input placeholder="Mileage" value="{{offer.mileage}}" name="mileage" class="base-input"/>
+    </div>
+
+    <div class="flex gap-5">
+        <select name="engine_type" class="base-input">
+            <option value="">Engine</option>
+
+            {% for type in engine_types %}
+                {% if type == offer.engine_type %}
+                    <option value="{{type.pk}}" selected>{{type.type}}</option>
+                {% else %}
+                    <option value="{{type.pk}}">{{type.type}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <input placeholder="Engine Power" value="{{offer.engine_power}}" name="engine_power" class="base-input"/>
+    </div>
+
+    <div class="flex gap-5">
+        <input placeholder="Engine Displacement" value="{{offer.engine_size}}" name="engine_displacement"  class="base-input"/>
+        <input placeholder="Phone number"  value="{{offer.phone_number}}" name="phone_number" class="base-input"/>
+    </div>
+
+    <div class="flex gap-5">
+        <input placeholder="Production date"  value="{{offer.production_date|date:'Y-m-d' }}" type="date" name="prod_date"  class="base-input"/>
+        <input placeholder="Location" value="{{offer.location}}" name="location" class="base-input"/>
+    </div>
+    
+    <textarea name="description" class="rounded-2xl text-dark bg-inputBG font-display">{{offer.description}}</textarea>
+</div>
+
+<input type="file" name="file_images" accept="image/png, image/jpeg" multiple class="text-dark font-display w-full cursor-pointer bg-inputBG block">
+
+
+{% if error_message %}
+    <p class="font-display text-white mt-5">{{error_message}}</p>
+{% endif %}

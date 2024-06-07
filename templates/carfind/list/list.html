@@ -1,0 +1,30 @@
+{% extends 'carfind/base.html' %}
+
+{% load static %}
+
+{% block bodyblock %}
+    <script>
+        var selectedModel = "{{selectedModel}}";
+    </script>
+    
+    <script src="{% static 'js/modelFetch.js' %}"></script>
+
+    {% include 'carfind/navbar.html'%}
+
+    <div class="w-full h-full flex flex-row text-white justify-center gap-5">
+
+        <div class="mt-24">
+            {% include 'carfind/searchbar.html' %}
+        </div>
+
+        <div class="flex flex-col gap-5 mt-24">
+            {% if offers%}
+                {% for offer in offers %}
+                    {% include 'carfind/list/list_element.html' %}
+                {% endfor %}
+            {% else %}
+                <p class="text-white font-serif text-2xl">There are no offers avaiable fitting yours filters</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

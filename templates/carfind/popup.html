@@ -1,0 +1,35 @@
+<div id="popup_bg" class="fixed w-screen h-screen bg-panelBG opacity-95"></div>
+<div id="popup_main" class="fixed w-screen h-screen flex items-center justify-center flex-col">
+    <div class="w-96 opacity-100">
+        <div class="base-panel flex items-center justify-center h-24">
+            <p class="font-display text-[21px]" id="popup_text">popup</p>
+        </div>
+
+        <div class="flex">
+            <button class="button-light-n-rounded rounded-bl-2xl" onclick="popupClick()">Yes</button>
+            <button class="button-light-n-rounded rounded-br-2xl" onclick="popupHide()">No</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    var popupBG = document.getElementById("popup_bg");
+    var popupMain = document.getElementById("popup_main");
+    var popupText = document.getElementById("popup_text");
+
+    function popupShow(text)
+    {
+        popupBG.style.visibility = "visible";
+        popupMain.style.visibility = "visible";
+
+        popupText.innerHTML = text;
+    }
+
+    function popupHide()
+    {
+        popupBG.style.visibility = "hidden";
+        popupMain.style.visibility = "hidden";
+    }
+
+    popupHide()
+</script>

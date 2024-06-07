@@ -1,0 +1,75 @@
+<div class="text-white">
+    <form method="get" action="{% url 'carfind_core:list' %}" class="w-[250px]">
+        <div class="base-panel h-[670px] flex flex-col gap-[0.9rem] items-center">
+            <p class="mt-5">Make & model</p>
+
+            <select id="makeSelect" name="make" onchange="setModels()" class="base-input">
+                <option value="">Make</option>
+
+                {% for make in makes %}
+                    {% if make.pk == selectedMake %}
+                        <option value="{{make.pk}}" selected>{{make.name}}</option>
+                    {% else %}
+                        <option value="{{make.pk}}">{{make.name}}</option>
+                    {% endif %}
+                {% endfor %}
+
+            </select>
+
+            <select id="modelSelect" name="model" class="base-input">
+                <option value="" selected>Model</option>
+            </select>
+
+            <script>
+                setModels();
+            </script>
+
+            <hr class="base-line">
+            <p>Price range</p>
+
+            <div class="flex flex-row gap-5 items-baseline">
+                <input type="number" name="price_from" placeholder="From" class="base-input-small"/>
+                <p class="font-display text-dark">-</p>
+                <input type="number" name="price_to" placeholder="To" class="base-input-small"/>
+            </div>
+
+            <p>Mileage range</p>
+
+            <div class="flex flex-row gap-5 items-baseline">
+                <input type="number" name="mileage_from" placeholder="From" class="base-input-small"/>
+                <p class="font-display text-dark">-</p>
+                <input type="number" name="mileage_to" placeholder="To" class="base-input-small"/>
+            </div>
+
+            <hr class="base-line">
+            <p>Engine</p>
+
+            <select id="engineSelect" name="engineType" class="base-input">
+                <option value="" selected>Engine type</option>
+
+                {% for type in engineTypes %}
+                    <option value="{{type.pk}}">{{type.type}}</option>
+                {% endfor %}
+            </select>
+
+            <p>Power range</p>
+
+            <div class="flex flex-row gap-5 items-baseline">
+                <input type="number" name="power_from" placeholder="From" class="base-input-small"/>
+                <p class="font-display text-dark">-</p>
+                <input type="number" name="power_to" placeholder="To" class="base-input-small"/>
+            </div>
+
+            <p>Displacement range</p>
+
+            <div class="flex flex-row gap-5 items-baseline">
+                <input type="number" name="displacement_from" placeholder="From" class="base-input-small"/>
+                <p class="font-display text-dark">-</p>
+                <input type="number" name="displacement_to" placeholder="To" class="base-input-small"/>
+            </div>
+        </div>
+
+        <button class="button-light">Find</button>
+    </form>
+
+</div>

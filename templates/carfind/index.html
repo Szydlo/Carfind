@@ -1,0 +1,49 @@
+{% extends 'carfind/base.html' %}
+
+{% load static %}
+
+{% block bodyblock %}
+    <script src="{% static 'js/modelFetch.js' %}"></script>
+
+    <div class="w-screen h-screen flex items-center justify-center flex-col gap-5">
+
+        <div class="w-[650px]">
+            <div class="text-white flex justify-between items-baseline">
+                <a class="text-[62px] logo" href="{% url 'carfind_core:index' %}">Carfind.</a>
+                <p class="text-[21px] font-serif">Your transport solution</p>
+            </div>
+
+            <form method="get" action="{% url 'carfind_core:list' %}">
+                <div class="base-panel flex justify-center items-center h-[125px]">
+                    <div class="flex justify-center items-center gap-5">
+                        <select id="makeSelect" name="make" onchange="setModels()" class="base-input">
+                            <option value="" selected>Make</option>
+
+                            {% for make in makes %}
+                                <option value="{{make.pk}}">{{make.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <p class="text-dark text-[21px] font-display">></p>
+                        <select id="modelSelect" name="model" class="base-input">
+                            <option value="" selected>Model</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="button-light">Find</button>
+            </form>
+
+        </div>
+
+        <div class="flex gap-5 text-dark">
+            {% if not user.is_authenticated %}
+                <a class="link-dark" href="{% url 'carfind_core:user_login' %}">Login to account</a>
+                <p class="font-display">|</p>
+                <a class="link-dark" href="{% url 'carfind_core:user_register' %}">Create a new account</a>
+            {% else %}
+                <p class="font-display">You are logged as <a href="{% url 'carfind_core:user_account' %}" class="link-light">{{user}}</a>. <a href="{% url 'carfind_core:user_logout' %}" class="link-light">Click here to logout</a></p>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

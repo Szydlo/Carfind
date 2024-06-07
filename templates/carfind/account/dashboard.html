@@ -1,0 +1,27 @@
+{% extends 'carfind/base.html' %}
+
+{% load static %}
+
+{% block bodyblock %}
+
+{% include 'carfind/navbar.html' with is_dashobard='true' %}
+{% include 'carfind/popup.html' %}
+
+<div class="w-full h-full flex flex-row items-center justify-center">
+    <div class="flex flex-col gap-5 mt-24">
+        {% for offer in offers %}
+            {% include 'carfind/list/list_element.html' with editable="true" %}
+
+            <!-- it's really werid approach, but at the moment i don't have any better idea, so ill leave it like that -->
+            <form id="offerDelete" action="{% url 'carfind_core:offer_delete' offer.pk %}"></form>
+            
+            <script>
+                function popupClick()
+                {
+                    document.getElementById("offerDelete").submit();
+                }
+            </script>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

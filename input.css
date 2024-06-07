@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components
+{
+    .link-dark
+    {
+        @apply font-display text-dark hover:text-primary transition-all cursor-pointer
+    }
+
+    .link-light
+    {
+        @apply font-display text-primary hover:text-primaryHover transition-all cursor-pointer
+    }
+
+    .base-panel
+    {
+        @apply bg-panelBG rounded-t-2xl shadow-2xl text-white
+    }
+
+    .base-panel-full
+    {
+        @apply bg-panelBG rounded-2xl shadow-2xl text-white
+    }
+
+    .button-light
+    {
+        @apply text-white text-[21px] h-[35px] rounded-b-2xl w-full bg-primary font-display hover:bg-primaryHover transition-all 
+    }
+
+    .button-light-mobile
+    {
+        @apply text-white text-5xl h-16 rounded-b-2xl w-full bg-primary font-display hover:bg-primaryHover transition-all 
+    }
+
+    .button-light-n-rounded
+    {
+        @apply text-white text-[21px] h-[35px] w-full bg-primary font-display hover:bg-primaryHover transition-all text-center
+    }
+
+
+    .base-input
+    {
+        @apply font-display bg-inputBG text-dark rounded-2xl text-center text-[21px] w-[210px] h-[45px]
+    }
+
+    .base-input-mobile
+    {
+        @apply font-display bg-inputBG text-dark rounded-2xl text-center w-full h-full text-5xl
+    }
+
+    .base-input-small
+    {
+        @apply bg-inputBG rounded-2xl font-display text-center h-[35px] w-[90px] text-dark [appearance:textfield]
+    }
+
+    .base-line
+    {
+        @apply text-dark h-0 w-3/4 rounded-2xl
+    }
+
+    .preview-line
+    {
+        @apply h-0 w-3/4 rounded-2xl text-inputBG
+    }
+
+    .logo
+    {
+        @apply font-serif hover:cursor-pointer
+    }
+
+    .showIt 
+    {
+        @apply block
+    }
+}

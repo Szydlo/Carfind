@@ -1,0 +1,30 @@
+{% extends 'carfind/base.html' %}
+
+{% load static %}
+
+{% block bodyblock %}
+<script src="{% static 'js/modelFetch.js' %}"></script>
+
+{% include 'carfind/navbar.html' with is_dashobard='true' %}
+
+<div class="w-full h-screen flex flex-col items-center justify-center">
+    <form method="post" action="{% url 'carfind_core:offer_edit' offer.pk %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="gap-5 p-16 flex flex-col justify-center items-center base-panel ">
+           {% include 'carfind/account/add_offer_form.html' %}
+           <script>
+            selectedModel = "{{offer.model.name}}";
+
+            setModels()  
+        </script>
+        </div>
+
+        <div class="flex">
+            <button class="button-light-n-rounded rounded-bl-2xl">Edit</button>
+            <a href="{% url 'carfind_core:user_account' %}" class="button-light-n-rounded rounded-br-2xl">Cancel</a>
+        </div>
+    </form>
+
+    <a href="{% url 'carfind_core:user_account' %}" class="link-dark mt-5">Get back to dashboard</a>
+</div>
+{% endblock %}
